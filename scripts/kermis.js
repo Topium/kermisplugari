@@ -3,6 +3,7 @@ const texts = []
 texts.push(document.getElementsByTagName('span'))
 texts.push(document.getElementsByTagName('p'))
 texts.push(document.getElementsByTagName('a'))
+texts.push(document.getElementsByTagName('h1'))
 const imgUrl = chrome.runtime.getURL('../images/kermis1.jpg')
 const rx = /\b[A-ZÅÄÖ][a-zA-ZåäöÅÄÖ]*/g
 
@@ -14,9 +15,9 @@ function replaceText(els) {
     }
 }
 
-setTimeout(() => {
+function kermifyPage() {
     if (pics && pics.length) {
-        console.log('ping')
+        console.log('kerm')
         for (let pic of pics) {
             for (let el of pic.children) {
                 if (el.tagName === "SOURCE") {
@@ -30,5 +31,10 @@ setTimeout(() => {
     for (let els of texts) {
         replaceText(els)
     }
-        
+}
+
+kermifyPage()
+
+setInterval(() => {
+    kermifyPage()
 }, 3000);
